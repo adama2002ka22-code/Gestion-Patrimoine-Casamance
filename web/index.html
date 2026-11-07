@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ziguinchor, perle de la Casamance</title>
+    <style>
+        :root{--nuit:#14283a;--vert:#14532d;--sable:#fbf5e9;--or:#f59e0b;--terre:#c2410c;--texte:#23272b;--gris:#6b7280}
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Calibri,Arial,sans-serif;color:var(--texte);background:var(--sable)}
+        h1,h2,h3{font-family:Georgia,'Times New Roman',serif}
+        .top{position:sticky;top:0;z-index:10;background:rgba(20,40,58,.96);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 24px}
+        .marque{color:#fff;font-family:Georgia,serif;font-size:20px;font-weight:bold}
+        .marque span{color:var(--or)}
+        .top nav{display:flex;gap:4px;flex-wrap:wrap}
+        .top button{border:0;background:transparent;color:#e8edf2;padding:9px 14px;border-radius:20px;font-size:15px;cursor:pointer}
+        .top button:hover{background:rgba(255,255,255,.12)}
+        .top button.on{background:var(--or);color:#2b1700;font-weight:700}
+        .hero{position:relative;height:460px;overflow:hidden;background:#14283a}
+        .hero svg,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .hero .voile{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,20,35,.15),rgba(10,20,35,.65))}
+        .hero .texte{position:absolute;left:0;right:0;bottom:48px;padding:0 24px;max-width:1100px;margin:0 auto;color:#fff}
+        .hero h1{font-size:50px;margin:0 0 10px;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+        .hero p{font-size:20px;margin:0 0 20px;max-width:620px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+        .btn{border:0;background:var(--or);color:#2b1700;padding:12px 24px;border-radius:26px;font-size:16px;font-weight:700;cursor:pointer}
+        .btn.sec{background:#fff;color:var(--vert);border:1px solid var(--vert)}
+        .btn.petit{padding:7px 16px;font-size:14px}
+        .cont{max-width:1100px;margin:0 auto;padding:28px 24px}
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:-52px;position:relative;z-index:2;max-width:1100px;margin-left:auto;margin-right:auto;padding:0 24px}
+        .stat{background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+        .stat b{display:block;font-size:38px;color:var(--terre);font-family:Georgia,serif;line-height:1.1}
+        .stat span{color:var(--gris);font-size:14px}
+        .stat.ko b{color:#9ca3af}
+        h2.sec{color:var(--nuit);font-size:30px;margin:34px 0 6px}
+        .sous{color:var(--gris);margin:0 0 18px}
+        .grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+        .carte{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);display:flex;flex-direction:column}
+        .photo{position:relative;height:170px;display:flex;align-items:center;justify-content:center;font-size:56px}
+        .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .corps{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+        .corps h3{margin:0;font-size:20px;color:var(--nuit)}
+        .lieu{color:var(--terre);font-size:14px;font-weight:600}
+        .desc{color:#4b5563;font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+        .puces{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+        .puce{background:#fdf0d5;color:#7c4a03;border-radius:12px;padding:3px 10px;font-size:12px}
+        .del{border:0;background:#fbe9e7;color:#b3261e;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;margin-top:8px;align-self:flex-start}
+        .trois{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+        .bloc{background:var(--nuit);color:#e8edf2;border-radius:16px;padding:22px}
+        .bloc .ic{font-size:34px}.bloc h3{color:var(--or);margin:8px 0}.bloc p{margin:0;line-height:1.5;font-size:15px}
+        .bandeau{background:var(--nuit);color:#fff;padding:26px 24px}
+        .bandeau h2{margin:0;font-size:32px}.bandeau p{margin:4px 0 0;color:#c3ceda}
+        .msg{min-height:22px;margin:0 0 12px;font-weight:600}.ok{color:#1f7a3f}.ko{color:#b3261e}
+        .wrap{overflow-x:auto;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+        table{border-collapse:collapse;width:100%;font-size:14px}
+        th{background:var(--nuit);color:#fff;text-align:left;padding:10px;white-space:nowrap}
+        td{padding:9px 10px;border-top:1px solid #eee;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        details{background:#fff;border-radius:14px;padding:16px 18px;margin-top:24px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+        summary{cursor:pointer;font-weight:700;color:var(--vert);font-size:17px}
+        .champs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+        label{display:block;font-size:13px;color:var(--gris);margin-bottom:4px}
+        input,select,textarea{width:100%;padding:9px;border:1px solid #d1d5db;border-radius:8px;font:inherit}
+        textarea{min-height:110px;font-family:Consolas,monospace}
+        .actions{margin-top:14px;display:flex;gap:10px}
+        .vide{padding:24px;color:var(--gris)}
+        footer{background:var(--nuit);color:#9fb0c0;text-align:center;padding:22px;margin-top:40px;font-size:14px}
+        @media(max-width:600px){.hero h1{font-size:34px}.hero{height:400px}}
+    </style>
+</head>
+<body>
+<header class="top">
+    <div class="marque">Ziguinchor <span>· Patrimoine</span></div>
+    <nav id="onglets"></nav>
+</header>
+
+<section id="accueil">
+    <div class="hero">
+        <svg viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <linearGradient id="ciel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a5e"/><stop offset=".45" stop-color="#b4442c"/><stop offset=".8" stop-color="#f59e0b"/><stop offset="1" stop-color="#fcd34d"/></linearGradient>
+                <linearGradient id="eau" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset=".35" stop-color="#9a3412"/><stop offset="1" stop-color="#0f3d3e"/></linearGradient>
+                <radialGradient id="soleil"><stop offset="0" stop-color="#fff7d1"/><stop offset="1" stop-color="#fcd34d" stop-opacity="0"/></radialGradient>
+                <g id="palme"><path d="M0 0 C6 -60 4 -120 -10 -190" stroke="#2b1b0e" stroke-width="9" fill="none" stroke-linecap="round"/>
+                    <g fill="#0b3b1f"><path d="M-10 -190 Q-70 -215 -125 -175 Q-70 -190 -10 -190Z"/><path d="M-10 -190 Q40 -230 105 -200 Q45 -200 -10 -190Z"/><path d="M-10 -190 Q-55 -160 -100 -120 Q-45 -150 -10 -190Z"/><path d="M-10 -190 Q30 -155 70 -110 Q25 -145 -10 -190Z"/><path d="M-10 -190 Q-20 -240 5 -265 Q0 -225 -10 -190Z"/></g></g>
+            </defs>
+            <rect width="1200" height="330" fill="url(#ciel)"/>
+            <circle cx="760" cy="270" r="150" fill="url(#soleil)"/>
+            <circle cx="760" cy="278" r="58" fill="#fff3c4"/>
+            <path d="M0 322 Q60 296 120 316 T250 308 T380 318 T520 306 T660 320 T820 304 T980 318 T1100 306 T1200 316 V340 H0Z" fill="#0f3f26"/>
+            <rect y="324" width="1200" height="136" fill="url(#eau)"/>
+            <g fill="#fde68a" opacity=".75"><rect x="700" y="336" width="120" height="4" rx="2"/><rect x="715" y="350" width="90" height="4" rx="2"/><rect x="730" y="366" width="60" height="4" rx="2"/><rect x="740" y="384" width="40" height="3" rx="1.5"/></g>
+            <path d="M300 372 Q380 402 500 372 L488 364 Q390 386 312 364Z" fill="#150d08"/>
+            <path d="M400 366 V318 M400 322 L440 352 L400 352Z" stroke="#150d08" stroke-width="3" fill="#150d08"/>
+            <use href="#palme" x="110" y="460"/><use href="#palme" x="1090" y="460" transform="translate(2180 0) scale(-1 1)"/>
+            <use href="#palme" x="200" y="470" transform="translate(0 0)" opacity=".9"/>
+        </svg>
+        <img src="images/hero.jpg" alt="" onerror="this.remove()">
+        <div class="voile"></div>
+        <div class="texte">
+            <h1>Ziguinchor, perle de la Casamance</h1>
+            <p>Mangroves, fleuve et mémoire : partez à la découverte des sites patrimoniaux, des circuits de visite et des événements de la ville.</p>
+            <button class="btn" onclick="aller('circuits')">Découvrir les circuits</button>
+        </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="cont">
+        <h2 class="sec">Sites à découvrir</h2>
+        <p class="sous">Quelques sites du patrimoine de Ziguinchor.</p>
+        <div class="grille" id="vedettes"></div>
+        <h2 class="sec">Pourquoi visiter Ziguinchor ?</h2>
+        <p class="sous">Une ville qui se vit au fil de l'eau.</p>
+        <div class="trois">
+            <div class="bloc"><div class="ic">🏛️</div><h3>Histoire et mémoire</h3><p>Des lieux de recueillement et de transmission, comme le mémorial du bateau Le Joola.</p></div>
+            <div class="bloc"><div class="ic">🌴</div><h3>Nature</h3><p>Le fleuve Casamance, ses mangroves et ses couchers de soleil sur l'eau.</p></div>
+            <div class="bloc"><div class="ic">🎭</div><h3>Culture</h3><p>Expositions, ateliers et visites guidées organisés tout au long de l'année.</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="vue" hidden>
+    <div class="bandeau"><h2 id="titre"></h2><p id="soustitre"></p></div>
+    <div class="cont">
+        <div class="msg" id="msg"></div>
+        <div id="liste"></div>
+        <details id="ajout"><summary id="resume"></summary><form id="form"></form></details>
+    </div>
+</section>
+<footer>Ziguinchor · Patrimoine, circuits, événements et réservations · Projet L3 Informatique, UASZ</footer>
+
+<script>
+    const NUM = 'number';
+    const ENT = {
+      patrimoines: { label: 'Patrimoines', icone: '🏛️', teinte: ['#c2410c', '#7c2d12'], url: '/api/patrimoines',
+        sous: 'Les sites et lieux de mémoire à visiter.', champs: [
+        ['nomPatrimoine','Nom'],['codePatrimoine','Code'],['descriptionPatrimoine','Description'],['historiquePatrimoine','Historique'],
+        ['adressePatrimoine','Adresse'],['capacitePatrimoine','Capacité',NUM],['latitudePatrimoine','Latitude',NUM],['longitudePatrimoine','Longitude',NUM]] },
+      circuits: { label: 'Circuits', icone: '🧭', teinte: ['#0f766e', '#134e4a'], url: '/api/circuits',
+        sous: 'Des itinéraires de visite pour explorer la ville.', champs: [
+        ['codeCircuit','Code'],['nomCircuit','Nom'],['descriptionCircuit','Description'],['dureeTotale','Durée totale (min)',NUM],['distanceTotale','Distance totale (km)',NUM]] },
+      evenements: { label: 'Événements', icone: '🎭', teinte: ['#7e22ce', '#4c1d95'], url: '/api/evenements',
+        sous: 'Expositions, ateliers et visites guidées.', champs: null },
+      reservations: { label: 'Réservations', icone: '🎫', teinte: ['#1d4ed8', '#1e3a8a'], url: '/api/reservations', table: true,
+        sous: 'Réservez un circuit ou un événement.', champs: [
+        ['nomClient','Nom du client'],['emailClient','Email'],['nombrePersonnes','Nombre de personnes',NUM],
+        ['typeReservation','Type','select',['CIRCUIT','EVENEMENT']],['refId','Id du circuit ou de l\u2019événement',NUM]] }
+    };
+    let courant = 'accueil';
+    const $ = (id) => document.getElementById(id);
+    const esc = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+    function message(t, ok) { $('msg').textContent = t || ''; $('msg').className = 'msg ' + (ok ? 'ok' : 'ko'); }
+    function erreur(err) {
+      return err.message === '502' || err.message === '504'
+        ? 'Le service ne répond pas (HTTP ' + err.message + '). Vérifiez qu\u2019il est démarré avec « docker compose ps ».'
+        : 'Impossible de charger la liste (' + err.message + ').';
+    }
+    async function lire(k) {
+      const r = await fetch(ENT[k].url);
+      if (!r.ok) throw new Error(String(r.status));
+      const d = await r.json();
+      return Array.isArray(d) ? d : [d];
+    }
+
+    function onglets() {
+      const items = [['accueil', 'Accueil'], ...Object.entries(ENT).map(([k, e]) => [k, e.label])];
+      $('onglets').innerHTML = items.map(([k, l]) => `<button class="${k === courant ? 'on' : ''}" onclick="aller('${k}')">${l}</button>`).join('');
+    }
+    function aller(k) {
+      courant = k; message(''); onglets(); window.scrollTo(0, 0);
+      $('accueil').hidden = k !== 'accueil'; $('vue').hidden = k === 'accueil';
+      if (k === 'accueil') { accueil(); return; }
+      const e = ENT[k];
+      $('titre').textContent = e.icone + ' ' + e.label; $('soustitre').textContent = e.sous;
+      $('resume').textContent = '+ Ajouter : ' + e.label; $('ajout').open = false;
+      formulaire(); charger();
+    }
+
+    const trouve = (o, re) => Object.keys(o).find((c) => re.test(c) && o[c] !== null && o[c] !== '');
+    function carte(k, o) {
+      const e = ENT[k], id = o.id;
+      const t = trouve(o, /^(nom|titre|libelle)/i), d = trouve(o, /desc/i), l = trouve(o, /adresse|lieu|date/i);
+      const exclus = new Set(['id', t, d, l].filter(Boolean));
+      const puces = Object.keys(o).filter((c) => !exclus.has(c) && typeof o[c] === 'number' && !/latitude|longitude/i.test(c)).slice(0, 3)
+        .map((c) => `<span class="puce">${esc(c.replace(/([A-Z])/g, ' $1').toLowerCase())} : ${esc(o[c])}</span>`).join('');
+      return `<article class="carte"><div class="photo" style="background:linear-gradient(135deg,${e.teinte[0]},${e.teinte[1]})">${e.icone}
+        <img src="images/${k}-${id}.jpg" alt="" onerror="this.remove()"></div>
+        <div class="corps"><h3>${esc(t ? o[t] : e.label + ' n°' + id)}</h3>${l ? `<div class="lieu">📍 ${esc(o[l])}</div>` : ''}
+        ${d ? `<div class="desc">${esc(o[d])}</div>` : ''}<div class="puces">${puces}</div>
+        ${id != null ? `<button class="del" onclick="supprimer(${Number(id)})">Supprimer</button>` : ''}</div></article>`;
+    }
+    function tableau(lignes) {
+      const cols = [...new Set(lignes.flatMap((l) => Object.keys(l)))];
+      return '<div class="wrap"><table><thead><tr>' + cols.map((c) => `<th>${esc(c)}</th>`).join('') + '<th></th></tr></thead><tbody>' +
+        lignes.map((l) => '<tr>' + cols.map((c) => `<td title="${esc(l[c])}">${esc(l[c])}</td>`).join('') +
+        `<td><button class="del" style="margin:0" onclick="supprimer(${Number(l.id)})">Supprimer</button></td></tr>`).join('') + '</tbody></table></div>';
+    }
+    async function charger() {
+      const k = courant, e = ENT[k];
+      try {
+        const l = await lire(k);
+        $('liste').innerHTML = !l.length ? '<div class="vide">Rien pour le moment. Utilisez « Ajouter » ci-dessous.</div>'
+          : e.table ? tableau(l) : '<div class="grille">' + l.map((o) => carte(k, o)).join('') + '</div>';
+      } catch (err) { $('liste').innerHTML = ''; message(erreur(err), false); }
+    }
+
+    async function accueil() {
+      const res = await Promise.all(Object.keys(ENT).map(async (k) => { try { return [k, await lire(k)]; } catch (e) { return [k, null]; } }));
+      $('stats').innerHTML = res.map(([k, l]) => `<div class="stat ${l ? '' : 'ko'}"><b>${l ? l.length : '—'}</b><span>${ENT[k].icone} ${ENT[k].label}${l ? '' : ' (service indisponible)'}</span></div>`).join('');
+      const p = res.find(([k]) => k === 'patrimoines')[1];
+      $('vedettes').innerHTML = p && p.length ? p.slice(0, 3).map((o) => carte('patrimoines', o).replace(/<button class="del".*?<\/button>/, '')).join('')
+        : '<div class="vide">Ajoutez un premier patrimoine pour qu\u2019il apparaisse ici.</div>';
+    }
+
+    function formulaire() {
+      const e = ENT[courant];
+      const corps = e.champs ? '<div class="champs">' + e.champs.map(([n, l, t, o]) =>
+        `<div><label>${esc(l)}</label>${t === 'select' ? `<select name="${n}">${o.map((x) => `<option>${x}</option>`).join('')}</select>` : `<input name="${n}" type="${t === NUM ? 'number' : 'text'}" step="any" required>`}</div>`).join('') + '</div>'
+        : '<p class="sous">Saisissez le corps JSON de l\u2019événement, comme dans Postman.</p><textarea name="json" placeholder=\'{"titre": "..."}\' required></textarea>';
+      $('form').innerHTML = corps + '<div class="actions"><button class="btn petit" type="submit">Enregistrer</button></div>';
+    }
+    $('form').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const e = ENT[courant], fd = new FormData(ev.target);
+      let corps;
+      try {
+        if (e.champs) { corps = {}; e.champs.forEach(([n,, t]) => { const v = fd.get(n); corps[n] = t === NUM ? Number(v) : v; }); }
+        else corps = JSON.parse(fd.get('json'));
+      } catch (err) { message('JSON invalide : ' + err.message, false); return; }
+      try {
+        const r = await fetch(e.url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corps) });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        message('Enregistré avec succès.', true); ev.target.reset(); $('ajout').open = false; charger();
+      } catch (err) { message('Échec de l\u2019enregistrement : ' + err.message, false); }
+    });
+    async function supprimer(id) {
+      if (!confirm('Supprimer l\u2019élément ' + id + ' ?')) return;
+      try {
+        const r = await fetch(ENT[courant].url + '/' + id, { method: 'DELETE' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        message('Élément supprimé.', true); charger();
+      } catch (err) { message('Échec de la suppression : ' + err.message, false); }
+    }
+    aller('accueil');
+</script>
+</body>
+</html>

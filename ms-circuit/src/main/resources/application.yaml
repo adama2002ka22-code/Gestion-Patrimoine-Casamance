@@ -1,0 +1,24 @@
+server:
+  port: 3002
+spring:
+  application:
+    name: circuit
+  datasource:
+    url: jdbc:h2:mem:circuitdb
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,44 @@
+services:
+  ms-patrimoine:
+    image: aminata/patrimoine:v1
+    ports:
+      - "3001:3001"
+
+  ms-circuit:
+    image: aminata/circuit:v1
+    ports:
+      - "3002:3002"
+    environment:
+      CLIENTS_PATRIMOINE_URL: http://ms-patrimoine:3001
+    depends_on:
+      - ms-patrimoine
+
+  ms-evenement:
+    image: aminata/evenement:v1
+    ports:
+      - "3003:3003"
+
+  ms-reservation:
+    image: aminata/reservation:v1
+    ports:
+      - "3004:3004"
+    environment:
+      CLIENTS_CIRCUIT_URL: http://ms-circuit:3002
+      CLIENTS_EVENEMENT_URL: http://ms-evenement:3003
+    depends_on:
+      - ms-circuit
+      - ms-evenement
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web/index.html:/usr/share/nginx/html/index.html:ro
+      - ./web/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/images:/usr/share/nginx/html/images:ro
+    depends_on:
+      - ms-patrimoine
+      - ms-circuit
+      - ms-evenement
+      - ms-reservation
